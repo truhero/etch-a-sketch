@@ -21,16 +21,16 @@
                 <button class="tools-button">Tools</button>
                 <span class="range-slider">
                     <span style="padding-right: 5px; font-size: 16px; color: white ">0</span>&nbsp;
-                    <input type="range" min="1" max="64" value="16" class="slider" id="my-range" onInput= "document.getElementById('slider-output').innerHTML = this.value; createGrid(this.value)"/>
+                    <input type="range" min="1" max="64" value="16" class="slider" id="my-range" onInput = "document.getElementById('slider-output').innerHTML = this.value;" onchange="createGrid(this.value) , changePenType();"  />
                     <span id="slider-output" style="padding-left:20px;">16</span>
                 </span>
                 <button class="clear-button">Clear</button>
             </div>
 
-            <div class = "tools-container" id ="tools" style = "visibility: visible;" >
+            <div class = "tools-container" id ="tools" style = "visibility: hidden;" >
                 <button id = "pen-type" >Pen Type: Follow</button>
                 <button id = "fill-grid">Fill Grid</button>
-                <button id = "rainbow">Rainbow</button>
+                <button id = "rainbow" style = "visibility: hidden;">Rainbow</button>
                 <div id ="picker"></div>
             </div>
 

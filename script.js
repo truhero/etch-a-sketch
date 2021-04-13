@@ -10,9 +10,11 @@ const rainbowButton = document.getElementById('rainbow');
 let startSize = 16 ;
 let gridWidthHeight = 41 ;
 let penType = 0 ;
+var first = 'false';
+//const penStroke = ['mouseOver' , 'click'];
 
 function createGrid(size){
-    if(size !==16){resetBoard();}
+    if(first !== 'false'){resetBoard();}
     for(var i = 1 ; i <= (size*size) ; i++){
         var newDiv = document.createElement('div');
         newDiv.classList.add('grid-div');
@@ -22,12 +24,9 @@ function createGrid(size){
     gridCell.forEach(cell => {
         cell.style.width  = `${gridWidthHeight / size}rem`;
         cell.style.height = `${gridWidthHeight / size}rem`;
-    })   
-
-    gridCell.forEach(individDivGrid => {
-        individDivGrid.addEventListener('mouseover' , changeBackground);
-        individDivGrid.addEventListener('touchmove', changeBackground);
-     })
+    }) 
+    changePenType();
+    first = true;
 }
 
 function changeBackground(){
@@ -54,13 +53,21 @@ function fillBoardColor() {
 }
 
 function changePenType(){
-    if (penType == 0 ){
+    if (penType == 1 ){
         document.getElementById('pen-type').textContent = 'Pen Type: Click' ;
-        ++penType;
+        gridCell.forEach(cell => {
+            cell.removeEventListener('mouseover',changeBackground);
+            cell.addEventListener('click' , changeBackground);
+         })
+        --penType;
     }
     else{
         document.getElementById('pen-type').textContent = 'Pen Type: Follow' ;
-        --penType;
+        gridCell.forEach(cell => {
+            cell.removeEventListener('click',changeBackground);
+            cell.addEventListener('mouseover' , changeBackground);
+         })
+        ++penType;
     }
 }
 
